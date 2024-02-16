@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extra logging related to initialization of Log4j.
+ Set to debug or trace if log4j initialization is failing. -->
+<Configuration status="warn" allowDynamicVariables="true">
+    <properties>
+        <property name="LOGS" value="${sys:logging.path:-./logs}" />
+        <property name="APP" value="${sys:spring.application.name:-DEVSLING}" />
+        <property name="SOCKET" value="false" />
+        <Property name="defaultPattern">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Property>
+
+    </properties>
+    <Appenders>
+        <!-- Console appender configuration -->
+        <Console name="consoleLogger" target="SYSTEM_OUT">
+            <PatternLayout pattern="${defaultPattern}" />
+        </Console>
+
+
+        <RollingFile name="fileLogger" fileName="${LOGS}/${APP}.log"
+            filePattern="${LOGS}/${APP}-%d{yyyy-MM-dd-HH-mm}-%i.log">
+
+            <PatternLayout pattern="${defaultPattern}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="60" modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${LOGS}" maxDepth="10">
+                    <IfLastModified age="30m" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <!-- Root logger referring to console appender -->
+        <Root level="info" additivity="false">
+            <AppenderRef ref="consoleLogger" />
+            <AppenderRef ref="fileLogger" />
+            <!-- <AppenderRef ref="mailLogger" /> -->
+
+        </Root>
+    </Loggers>
+</Configuration>
