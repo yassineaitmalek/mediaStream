@@ -4,7 +4,7 @@
 <Configuration status="warn" allowDynamicVariables="true">
     <properties>
         <property name="LOGS" value="${sys:logging.path:-./logs}" />
-        <property name="APP" value="${sys:spring.application.name:-DEVSLING}" />
+        <property name="APP" value="${sys:spring.application.name:-test}" />
         <property name="SOCKET" value="false" />
         <Property name="defaultPattern">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Property>
 
