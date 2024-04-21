@@ -22,7 +22,7 @@ public class VersionController implements AbstractController {
 
   @GetMapping
   public ResponseEntity<ApiDataResponse<VersionDTO>> getVersion() {
-    return ok(VersionDTO.builder().version(appVersion).build());
+    return ok(() -> VersionDTO.builder().version(appVersion).build());
   }
 
 }

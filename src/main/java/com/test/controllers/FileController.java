@@ -31,7 +31,8 @@ public class FileController implements AbstractController {
 
   @PutMapping(value = "/upload", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
   public ResponseEntity<ApiDataResponse<Attachement>> upload(@ModelAttribute @Valid FileDTO fileDTO) {
-    return ok(fileService.uploadFile(fileDTO));
+
+    return ok(() -> fileService.uploadFile(fileDTO));
   }
 
   @GetMapping(value = "/download/{id}")
@@ -41,8 +42,8 @@ public class FileController implements AbstractController {
 
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<Void> delete(@PathVariable String id) {
-    fileService.deleteAttachement(id);
-    return delete();
+
+    return delete(() -> fileService.deleteAttachement(id));
   }
 
   @GetMapping(value = "/stream/{id}")

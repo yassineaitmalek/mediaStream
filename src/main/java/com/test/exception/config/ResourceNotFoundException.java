@@ -1,6 +1,6 @@
 package com.test.exception.config;
 
-public class ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends ClientSideException {
 
   /**
    * @param message
@@ -20,9 +20,19 @@ public class ResourceNotFoundException extends RuntimeException {
   }
 
   public static void reThrow(Throwable throwable) {
-
     throw new ResourceNotFoundException(throwable.getMessage(), throwable);
+  }
 
+  public static ResourceNotFoundException of(Throwable throwable) {
+    return new ResourceNotFoundException(throwable.getMessage(), throwable);
+  }
+
+  public static ResourceNotFoundException of(String message, Throwable cause) {
+    return new ResourceNotFoundException(message, cause);
+  }
+
+  public static ResourceNotFoundException of(String message) {
+    return new ResourceNotFoundException(message);
   }
 
 }

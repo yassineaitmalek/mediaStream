@@ -26,9 +26,4 @@ public class ApiPartialInput {
   private String ext;
 
   private long lenght;
-
-  public String getContentRange() {
-    return "bytes" + " " + start + "-" + end + "/" + size;
-
-  }
 }
